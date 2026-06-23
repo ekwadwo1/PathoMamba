@@ -40,7 +40,7 @@ Checkpointing and Automatic Mixed Precision (AMP).
 
 ## Requirements
 
-- Google Colab, NVIDIA A100 (40GB)} GPU using PyTorch and MONAI.
+- Google Colab, NVIDIA A100 (40GB) GPU using PyTorch and MONAI.
 - PyTorch with CUDA
 - nibabel, scipy, numpy, pandas, tqdm, matplotlib
 
