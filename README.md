@@ -10,7 +10,7 @@ inside pathology while preserving topology in healthy parenchyma.
 PathoMamba parameterizes the deformation via a Stationary Velocity Field
 integrated by scaling-and-squaring, and modulates feature dynamics using a
 signed-distance-function (SDF) prior derived from the tumor segmentation. 
-We optimize the network using \textbf{AdamW} ($\text{lr} = 2e^{-4}$) with a 
+We optimize the network using (AdamW) ($\text{lr} = 2e^{-4}$) with a 
 cosine annealing schedule for 300 epochs.
 To manage the memory footprint of 3D state-space modeling, we utilize the
 gradient Checkpointing and Automatic Mixed Precision (AMP).
