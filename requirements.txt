@@ -1,0 +1,8 @@
+Google Colab Plus, NVIDIA A100 (40GB)
+torch
+nibabel
+scipy
+numpy
+pandas
+tqdm
+matplotlib
