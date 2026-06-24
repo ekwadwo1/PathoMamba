@@ -72,14 +72,14 @@ class LDiff(nn.Module):
 # ============================================================
 # 5.2: L_sim -- Local Normalized Cross-Correlation (LNCC)
 # ============================================================
-# Rebuttal: 9^3 window. LNCC is robust to inter-timepoint intensity
+# LNCC is robust to inter-timepoint intensity
 # differences (it correlates local structure, not absolute intensity).
 # Returns 1 - LNCC so that LOWER is better (a loss). Perfect alignment -> 0.
 
 def lncc_loss(warped, target, window=9, eps=1e-5, mask=None):
     """
     1 - mean local normalized cross-correlation over a window^3 neighborhood,
-    averaged over FOREGROUND voxels only. Rebuttal: 9^3 window.
+    averaged over FOREGROUND voxels only.
 
     PRECISION: LNCC's windowed-variance ("sum of squares minus square of sums")
     is catastrophically unstable in bf16 -- probe scripts/18 showed cc reaching
@@ -135,7 +135,7 @@ class LSim(nn.Module):
 # ============================================================
 # 5.3: L_TABL -- Tumor-Aware Biomechanical Loss (component-wise)
 # ============================================================
-# Rebuttal [1]: per-connected-component Jacobian penalty driven by the
+# per-connected-component Jacobian penalty driven by the
 # observed log-volume ratio eta_k = log(V_T1^k / V_T0^k). Growing components
 # (eta_k > 0) pushed toward |J| > 1; shrinking (eta_k < 0) toward |J| < 1.
 # Handles simultaneous recurrence + cavity collapse (a single scalar eta
@@ -234,7 +234,7 @@ class LTABL(nn.Module):
 # ============================================================
 # 5.4: L_MK -- Monro-Kellie peritumoral shell penalty
 # ============================================================
-# Rebuttal [1]: second term of Eq.(4): (1/|Omega_shell|) * sum ReLU(|J|-1-delta)
+# second term of Eq.(4): (1/|Omega_shell|) * sum ReLU(|J|-1-delta)
 # over the peritumoral SHELL (healthy rim just outside the tumor). Monro-Kellie
 # doctrine: the rigid skull conserves intracranial volume, so the healthy rim
 # around a growing tumor is DISPLACED, not expanded. This penalizes unphysical
@@ -275,7 +275,7 @@ class LMK(nn.Module):
 # ============================================================
 # 5.5: Total objective
 # ============================================================
-# Rebuttal: L_total = L_sim + lambda_reg * L_diff + lambda_bio * (L_TABL + L_MK)
+# L_total = L_sim + lambda_reg * L_diff + lambda_bio * (L_TABL + L_MK)
 
 class PathoMambaLoss(nn.Module):
     """
